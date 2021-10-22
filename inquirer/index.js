@@ -49,3 +49,33 @@ const introPrompt = () => {
             }
         })
 }
+
+const viewAllDepartments = () => {
+    console.log('This works!')
+}
+
+const viewAllRoles = () => {
+    console.log('This works!')
+}
+
+const viewAllEmployees = () => {
+    console.log('This works!')
+}
+
+const addDepartment = () => {
+    console.log('This works!')
+}
+
+const addRole = () => {
+    console.log('This works!')
+}
+
+const addEmployee = () => {
+    console.log('This works!')
+}
+
+const updateRole = () => {
+    console.log('This works!')
+}
+
+introPrompt();
