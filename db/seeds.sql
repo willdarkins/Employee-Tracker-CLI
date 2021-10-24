@@ -12,4 +12,3 @@ VALUES
 ("Gael", "Monfils", 8),
 ("Grigor", "Dimitrov", 9),
 ("John", "Isner", 10);
-
