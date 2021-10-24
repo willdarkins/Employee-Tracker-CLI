@@ -1,6 +1,7 @@
 //List of Node.js modules needed to run application
 const fs = require('fs');
 const inquirer = require('inquirer');
+const Connection = require('mysql2/typings/mysql/lib/Connection');
 const path = require('path');
 const { choices } = require('yargs');
 
@@ -63,6 +64,9 @@ const introPrompt = () => {
                 case 'Delete Employees':
                     deleteEmployees()
                     break;
+                case 'Exit':
+                    console.log('Bye');
+                    Connection.end();
                 default:
                     ''
                     break;
