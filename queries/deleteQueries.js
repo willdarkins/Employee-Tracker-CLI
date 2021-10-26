@@ -1,6 +1,5 @@
-const express = require('express');
-const router = express.Router();
-const db = require('../../db/connection');
+const mysql = require('mysql2');
+const connection = require('../db/connection');
 
 
 const deleteDepartments = () => {
@@ -16,7 +15,6 @@ const deleteEmployees = () => {
 
 
 module.exports = {
-    router,
     deleteDepartments,
     deleteRoles,
     deleteEmployees

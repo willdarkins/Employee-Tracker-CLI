@@ -1,22 +1,13 @@
 const mysql = require('mysql2');
-const express = require('express');
-const router = express.Router();
-require("console.table");
-const db = require('../../db/connection');
+const connection = require('../db/connection');
 
 //View all departments
-async function viewAllDepartments (){ 
-  const sql = "SELECT * FROM department";
-  db.query(sql, (err, response) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      console.table("All departments: ", response);
-    }
-  });
+function viewAllDepartments (){ 
+  return connection.promise().query("SELECT * FROM department")
 }
 
 const viewAllRoles = () => {
-  console.log('This works!')
+  return connection.promise().query("SELECT * FROM role")
 }
 const viewAllEmployees = () => {
   console.log('This works!')
@@ -29,7 +20,6 @@ const viewEmployeesByDepartment = () => {
 }
 
 module.exports = {
-  router,
   viewAllDepartments,
   viewAllRoles,
   viewAllEmployees,

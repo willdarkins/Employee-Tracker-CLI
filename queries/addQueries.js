@@ -1,7 +1,5 @@
-const express = require('express');
-const router = express.Router();
-const db = require('../../db/connection');
-
+const mysql = require('mysql2');
+const connection = require('../db/connection');
 
 const addDepartment = () => {
     console.log('This works!')
@@ -59,7 +57,6 @@ const addEmployee = () => {
 
 
 module.exports = {
-    router,
     addDepartment,
     addRole,
     addEmployee

@@ -1,11 +1,10 @@
 //List of Node.js modules needed to run application
-const fs = require('fs');
 const inquirer = require('inquirer');
-const mysql = require('mysql2');
-const { viewAllDepartments, viewAllRoles, viewAllEmployees, viewEmployeesByManager, viewEmployeesByDepartment } = require('./routes/apiRoutes/viewRoutes');
-const{ addDepartment, addRole, addEmployee } = require('./routes/apiRoutes/addRoutes');
-const{ updateRole, updatedEmployManager } = require('./routes/apiRoutes/updateRoutes');
-const{ deleteDepartments, deleteRoles, deleteEmployees } = require('./routes/apiRoutes/deleteRoutes');
+require("console.table");
+const { viewAllDepartments, viewAllRoles, viewAllEmployees, viewEmployeesByManager, viewEmployeesByDepartment } = require('./queries/viewQueries');
+const { addDepartment, addRole, addEmployee } = require('./queries/addQueries');
+const { updateRole, updatedEmployManager } = require('./queries/updateQueries');
+const { deleteDepartments, deleteRoles, deleteEmployees } = require('./queries/deleteQueries');
 
 const introPrompt = () => {
     console.log(`
@@ -20,18 +19,18 @@ const introPrompt = () => {
             name: 'mainselect',
             message: 'Please choose from one of the following options:',
             choices: ['View All Departments', 'View All Roles', 'View All Employees',
-            'View employees by manager', 'View employees by department', 'Add a Department',
-            'Add a Role', 'Add an Employee', 'Update an Employee Role','Update employee manager',
-            'Delete departments', 'Delete roles', 'Delete Employees', 'Exit']
+                'View employees by manager', 'View employees by department', 'Add a Department',
+                'Add a Role', 'Add an Employee', 'Update an Employee Role', 'Update employee manager',
+                'Delete departments', 'Delete roles', 'Delete Employees', 'Exit']
         }
     ])
         .then(({ mainselect }) => {
             switch (mainselect) {
                 case 'View All Departments':
-                    viewAllDepartments()
+                    viewDepartments()
                     break;
                 case 'View All Roles':
-                    viewAllRoles()
+                    viewRoles()
                     break;
                 case 'View All Employees':
                     viewAllEmployees()
@@ -74,6 +73,26 @@ const introPrompt = () => {
                     break;
             }
         })
+}
+
+const viewDepartments = () => {
+    viewAllDepartments()
+        .then(([depts]) => {
+            console.log('\n')
+            console.table(depts);
+        }).then( () => {
+            introPrompt();
+        })
+}
+
+const viewRoles = () => {
+    viewAllRoles()
+    .then(([roles]) => {
+        console.log('\n')
+        console.table(roles)
+    }).then( () => {
+        introPrompt();
+    })
 }
 
 module.exports = introPrompt
