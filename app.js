@@ -54,7 +54,7 @@ const introPrompt = () => {
                     employeesByManager()
                     break;
                 case 'View employees by department':
-                    viewEmployeesByDepartment()
+                    employeesByDepartment()
                     break;
                 case 'Delete departments':
                     deleteDepartments()
@@ -111,6 +111,16 @@ const employeesByManager = () => {
         console.log('\n')
         console.table(employmanagers)
     }).then( () => {
+        introPrompt();
+    })
+}
+
+const employeesByDepartment = () => {
+    viewEmployeesByDepartment()
+    .then(([employdept]) => {
+        console.log('\n')
+        console.table(employdept)
+    }).then ( () => {
         introPrompt();
     })
 }

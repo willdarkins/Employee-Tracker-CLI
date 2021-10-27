@@ -18,7 +18,7 @@ const addEmployee = () => {
     inquirer.prompt([
         {
             type: 'input',
-            name: 'employeefirstname',
+            name: 'firstname',
             message: 'What\'s your employee\'s first name?',
             validate: nameanswer => {
                 if (nameanswer) {
@@ -31,7 +31,7 @@ const addEmployee = () => {
         },
         {
             type: 'input',
-            name: 'employeelastname',
+            name: 'lastname',
             message: 'What\'s your employee\'s last name?',
             validate: lastnameanswer => {
                 if (lastnameanswer) {
@@ -42,15 +42,26 @@ const addEmployee = () => {
                 }
             }
         },
-        inquirer.prompt([
-            {
-                type: 'list',
-                name: 'roleselect',
-                message: 'What is the employee\'s role?:',
-                choices: ['Saleslead', 'Salesperson', 'Lead Engineer',
-                    'Software Engineer', 'Account Manager', 'Accountant', 'Legal Team Lead', 'Lawyer']
+        {
+            type: 'list',
+            name: 'roleselect',
+            message: 'What is the employee\'s role?:',
+            choices: ['1 Saleslead', '2 Salesperson', '3 Lead Engineer',
+                '4 Software Engineer', '5 Account Manager', '6 Accountant', '7 Legal Team Lead', '8 Lawyer']
+        },
+        {
+            type: 'list',
+            name: 'managerselect',
+            message: 'What is the employees\'s manager\'s ID?',
+            validate: managerId => {
+                if (managerId) {
+                    return true;
+                } else {
+                    console.log('\nA manager ID is required:')
+                    return false;
+                }
             }
-        ])
+        }
     ])
 }
 
