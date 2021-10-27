@@ -33,7 +33,7 @@ const introPrompt = () => {
                     viewRoles()
                     break;
                 case 'View All Employees':
-                    viewAllEmployees()
+                    viewEmployees()
                     break;
                 case 'Add a Department':
                     addDepartment()
@@ -90,6 +90,16 @@ const viewRoles = () => {
     .then(([roles]) => {
         console.log('\n')
         console.table(roles)
+    }).then( () => {
+        introPrompt();
+    })
+}
+
+const viewEmployees = () => {
+    viewAllEmployees()
+    .then(([employees]) => {
+        console.log('\n')
+        console.table(employees)
     }).then( () => {
         introPrompt();
     })

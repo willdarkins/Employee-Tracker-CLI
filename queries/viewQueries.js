@@ -9,9 +9,11 @@ function viewAllDepartments (){
 const viewAllRoles = () => {
   return connection.promise().query("SELECT * FROM role")
 }
+
 const viewAllEmployees = () => {
-  console.log('This works!')
+  return connection.promise().query("SELECT * FROM employee")
 }
+
 const viewEmployeesByManager = () => {
   console.log('This works!')
 }
