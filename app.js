@@ -42,7 +42,7 @@ const introPrompt = () => {
                     addRole()
                     break;
                 case 'Add an Employee':
-                    addEmployee()
+                    startAddEmployee()
                     break;
                 case 'Update an Employee Role':
                     updateRole()
@@ -125,6 +125,9 @@ const employeesByDepartment = () => {
     })
 }
 
+const startAddEmployee = () => {
+    addEmployee()
+}
 module.exports = introPrompt
 
 introPrompt();

@@ -1,5 +1,6 @@
 const mysql = require('mysql2');
 const connection = require('../db/connection');
+const inquirer = require('inquirer');
 
 const addDepartment = () => {
     console.log('This works!')
@@ -50,7 +51,7 @@ const addEmployee = () => {
                 '4 Software Engineer', '5 Account Manager', '6 Accountant', '7 Legal Team Lead', '8 Lawyer']
         },
         {
-            type: 'list',
+            type: 'input',
             name: 'managerselect',
             message: 'What is the employees\'s manager\'s ID?',
             validate: managerId => {
