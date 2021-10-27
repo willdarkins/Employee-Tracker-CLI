@@ -51,7 +51,7 @@ const introPrompt = () => {
                     updatedEmployManager()
                     break;
                 case 'View employees by manager':
-                    viewEmployeesByManager()
+                    employeesByManager()
                     break;
                 case 'View employees by department':
                     viewEmployeesByDepartment()
@@ -100,6 +100,16 @@ const viewEmployees = () => {
     .then(([employees]) => {
         console.log('\n')
         console.table(employees)
+    }).then( () => {
+        introPrompt();
+    })
+}
+
+const employeesByManager = () => {
+    viewEmployeesByManager()
+    .then(([employmanagers]) => {
+        console.log('\n')
+        console.table(employmanagers)
     }).then( () => {
         introPrompt();
     })
