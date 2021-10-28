@@ -3,7 +3,7 @@ const connection = require('../db/connection');
 const { introPrompt } = require('../app');
 
 //View all departments
-function viewAllDepartments() {
+const viewAllDepartments = () => {
   return connection.promise().query("SELECT * FROM department")
     .then(([depts]) => {
       console.log('\n')
