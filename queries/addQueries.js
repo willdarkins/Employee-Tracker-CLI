@@ -67,13 +67,7 @@ const addEmployee = () => {
     ]).then((answer) => {
         let roleId = answer.roleselect.split(" ")
         return connection.promise().query(
-            "INSERT INTO employee SET ?",
-            {
-                first: answer.firstname,
-                last: answer.lastname,
-                managerID: answer.managerselect,
-                role_id: roleId,
-            },
+            "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)", [answer.firstname, answer.lastname, roleId, answer.managerselect],
             function (err, res) {
                 console.log(`${answer.firstname} ${answer.lastname} successfully added!`)
             })
