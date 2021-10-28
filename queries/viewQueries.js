@@ -1,13 +1,26 @@
 const mysql = require('mysql2');
 const connection = require('../db/connection');
+const { introPrompt } = require('../app');
 
 //View all departments
-function viewAllDepartments (){ 
+function viewAllDepartments() {
   return connection.promise().query("SELECT * FROM department")
+    .then(([depts]) => {
+      console.log('\n')
+      console.table(depts);
+    }).then(() => {
+      introPrompt;
+    })
 }
 
 const viewAllRoles = () => {
   return connection.promise().query("SELECT * FROM role")
+    .then(([roles]) => {
+      console.log('\n')
+      console.table(roles)
+    }).then(() => {
+      introPrompt;
+    })
 }
 
 const viewAllEmployees = () => {
@@ -17,7 +30,12 @@ const viewAllEmployees = () => {
   LEFT JOIN role ON role_id = role.id
   LEFT JOIN department ON department_id = department.id
   LEFT JOIN employee AS manager ON employee.manager_id = manager.id
-`)
+`).then(([employees]) => {
+    console.log('\n')
+    console.table(employees)
+  }).then(() => {
+    introPrompt;
+  })
 }
 
 const viewEmployeesByManager = () => {

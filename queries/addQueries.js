@@ -1,6 +1,7 @@
 const mysql = require('mysql2');
 const connection = require('../db/connection');
 const inquirer = require('inquirer');
+const { introPrompt } = require('../app');
 
 const addDepartment = () => {
     console.log('This works!')
@@ -47,8 +48,8 @@ const addEmployee = () => {
             type: 'list',
             name: 'roleselect',
             message: 'What is the employee\'s role?:',
-            choices: ['1 Saleslead', '2 Salesperson', '3 Lead Engineer',
-                '4 Software Engineer', '5 Account Manager', '6 Accountant', '7 Legal Team Lead', '8 Lawyer']
+            choices: ['1 Saleslead', '2 Salesperson', '3 Lead-Engineer',
+                '4 Software-Engineer', '5 Account-Manager', '6 Accountant', '7 Legal-Team-Lead', '8 Lawyer']
         },
         {
             type: 'input',
@@ -63,7 +64,20 @@ const addEmployee = () => {
                 }
             }
         }
-    ])
+    ]).then((answer) => {
+        let roleId = answer.roleselect.split(" ")
+        return connection.promise().query(
+            "INSERT INTO employee SET ?",
+            {
+                first: answer.firstname,
+                last: answer.lastname,
+                managerID: answer.managerselect,
+                role_id: roleId,
+            },
+            function (err, res) {
+                console.log(`${answer.firstname} ${answer.lastname} successfully added!`)
+            })
+    })
 }
 
 

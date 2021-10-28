@@ -27,13 +27,13 @@ const introPrompt = () => {
         .then(({ mainselect }) => {
             switch (mainselect) {
                 case 'View All Departments':
-                    viewDepartments()
+                    viewAllDepartments()
                     break;
                 case 'View All Roles':
-                    viewRoles()
+                    viewAllRoles()
                     break;
                 case 'View All Employees':
-                    viewEmployees()
+                    viewAllEmployees()
                     break;
                 case 'Add a Department':
                     addDepartment()
@@ -42,7 +42,7 @@ const introPrompt = () => {
                     addRole()
                     break;
                 case 'Add an Employee':
-                    startAddEmployee()
+                    addEmployee()
                     break;
                 case 'Update an Employee Role':
                     updateRole()
@@ -75,36 +75,6 @@ const introPrompt = () => {
         })
 }
 
-const viewDepartments = () => {
-    viewAllDepartments()
-        .then(([depts]) => {
-            console.log('\n')
-            console.table(depts);
-        }).then( () => {
-            introPrompt();
-        })
-}
-
-const viewRoles = () => {
-    viewAllRoles()
-    .then(([roles]) => {
-        console.log('\n')
-        console.table(roles)
-    }).then( () => {
-        introPrompt();
-    })
-}
-
-const viewEmployees = () => {
-    viewAllEmployees()
-    .then(([employees]) => {
-        console.log('\n')
-        console.table(employees)
-    }).then( () => {
-        introPrompt();
-    })
-}
-
 const employeesByManager = () => {
     viewEmployeesByManager()
     .then(([employmanagers]) => {
@@ -125,9 +95,8 @@ const employeesByDepartment = () => {
     })
 }
 
-const startAddEmployee = () => {
-    addEmployee()
+module.exports = {
+    introPrompt
 }
-module.exports = introPrompt
 
 introPrompt();
