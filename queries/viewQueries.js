@@ -39,15 +39,35 @@ const viewAllEmployees = () => {
 }
 
 const viewEmployeesByManager = () => {
-  return connection.promise().query(`
-  SELECT employee.id, employee.first_name, employee.last_name, CONCAT(manager.first_name, " ", manager.last_name) AS manager
-  FROM employee
-  LEFT JOIN employee AS manager ON employee.manager_id = manager.id
-`);
+  return connection.promise().query(`SELECT CONCAT(mgr.first_name, ' ', mgr.last_name) AS manager,
+  CONCAT(employee.first_name, ' ', employee.last_name) AS employee, role.title
+FROM employee
+LEFT JOIN employee mgr
+  ON employee.manager_id = mgr.id
+LEFT JOIN role
+  ON employee.role_id = role.id
+ORDER BY mgr.id`).then(([employees]) => {
+  console.log('\n')
+  console.table(employees)
+}).then(() => {
+  introPrompt;
+})
 }
 
 const viewEmployeesByDepartment = () => {
-  return connection.promise().query(" WHERE department.name = ?");
+  return connection.promise().query(`SELECT department.name AS department,
+  CONCAT(employee.first_name, ' ', employee.last_name) AS employee,
+FROM employee
+LEFT JOIN employee department
+  ON employee.manager_id = mgr.id
+LEFT JOIN role
+  ON employee.role_id = role.id
+ORDER BY mgr.id`).then(([employees]) => {
+  console.log('\n')
+  console.table(employees)
+}).then(() => {
+  introPrompt;
+})
 }
 
 module.exports = {

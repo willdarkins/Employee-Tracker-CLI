@@ -3,7 +3,7 @@ const connection = require('../db/connection');
 const inquirer = require('inquirer');
 
 const updateRole = () => {
-    connection.query("SELECT * FROM role"), (err, res) => {
+    connection.query("SELECT * FROM role", (err, res) => {
         if (err) {
             throw (error);
         }
@@ -19,18 +19,18 @@ const updateRole = () => {
             }
             let employees = res.map(employee => {
                 return {
-                    name: employee.first_name,
+                    name: employee.first_name + " " + employee.last_name,
                     value: employee.id
                 }
             })
             updatePrompt(employees, roles)
         })
-    }
-    const updatePrompt = () => {
+    })
+    const updatePrompt = (employees, roles) => {
         console.log(`
-    =============================
-       Update Employee by Role
-    =============================
+    ==========================
+       Update Employee Role
+    ==========================
     `);
         inquirer.prompt([
             {
@@ -50,7 +50,7 @@ const updateRole = () => {
                 "UPDATE employee SET role_ID=? WHERE id=?",
                 [answer.rolepick, answer.employeepick]
             ).then((res) => {
-                console.log(`${answer.employeepick}'s role has been updated to ${answer.rolepick}'`)
+                console.log(employees)
             })
         })
 
@@ -58,7 +58,58 @@ const updateRole = () => {
 }
 
 const updatedEmployManager = () => {
-    console.log('This works!')
+    connection.query("SELECT * FROM employee WHERE manager_id is NULL", (err, res) => {
+        if (err) {
+            throw (error);
+        }
+        let managers = res.map(manager => {
+            return {
+                name: manager.first_name + " " + manager.last_name,
+                value: manager.id
+            }
+        })
+        connection.query("SELECT * FROM employee", (err, res) => {
+            if (err) {
+                throw (error);
+            }
+            let employees = res.map(employee => {
+                return {
+                    name: employee.first_name + " " + employee.last_name,
+                    value: employee.id
+                }
+            })
+            updatePrompt(employees, managers)
+        })
+    })
+    const updatePrompt = (employees, managers) => {
+        console.log(`
+    =============================
+       Update Employee Manager
+    =============================
+    `);
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'employeepick',
+                message: 'Which employee would you like to update?',
+                choices: employees
+            },
+            {
+                type: 'list',
+                name: 'managerpick',
+                message: 'Please select which manager to reassign employee:',
+                choices: managers
+            }
+        ]).then((answer) => {
+            return connection.promise().query(
+                "UPDATE employee SET employee.manager_id = ? WHERE employee.id = ?",
+                [answer.managerpick, answer.employeepick]
+            ).then((res) => {
+                console.log(employees)
+            })
+        })
+
+    }
 }
 
 module.exports = {

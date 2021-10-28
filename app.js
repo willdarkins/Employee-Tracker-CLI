@@ -51,10 +51,10 @@ const introPrompt = () => {
                     updatedEmployManager()
                     break;
                 case 'View employees by manager':
-                    employeesByManager()
+                    viewEmployeesByManager()
                     break;
                 case 'View employees by department':
-                    employeesByDepartment()
+                    viewEmployeesByDepartment()
                     break;
                 case 'Delete departments':
                     deleteDepartments()
@@ -67,7 +67,7 @@ const introPrompt = () => {
                     break;
                 case 'Exit':
                     console.log('Bye');
-                    Connection.end();
+                    process.exit();
                 default:
                     ''
                     break;
@@ -75,8 +75,5 @@ const introPrompt = () => {
         })
 }
 
-module.exports = {
-    introPrompt
-}
-
 introPrompt();
+
