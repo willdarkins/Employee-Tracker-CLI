@@ -75,26 +75,6 @@ const introPrompt = () => {
         })
 }
 
-const employeesByManager = () => {
-    viewEmployeesByManager()
-    .then(([employmanagers]) => {
-        console.log('\n')
-        console.table(employmanagers)
-    }).then( () => {
-        introPrompt();
-    })
-}
-
-const employeesByDepartment = () => {
-    viewEmployeesByDepartment()
-    .then(([employdept]) => {
-        console.log('\n')
-        console.table(employdept)
-    }).then ( () => {
-        introPrompt();
-    })
-}
-
 module.exports = {
     introPrompt
 }
