@@ -8,7 +8,45 @@ const addDepartment = () => {
 }
 
 const addRole = () => {
-    console.log('This works!')
+    console.log(`
+    ==============
+       Add Role
+    ==============
+    `);
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Please list the name of the role:',
+            validate: roleanswer => {
+                if (roleanswer) {
+                    return true;
+                } else {
+                    console.log('\nA role name is required:')
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'Please provide a salary for this new role:',
+            validate: salaryanswer => {
+                if (Number.isNaN(salaryanswer)) {
+                    return true;
+                } else {
+                    console.log('\nA role salary is required and must be a number:')
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'list',
+            name: 'department',
+            message: 'Which department does this role fall under?',
+            choices: ['1 Sales', '2 Engineering', '3 Finance', '4 Legal']
+        },
+    ])
 }
 
 const addEmployee = () => {
@@ -65,10 +103,6 @@ const addEmployee = () => {
             }
         }
     ]).then((answer) => {
-        console.log(answer.firstname)
-        console.log(answer.lastname)
-        console.log(answer.roleselect)
-        console.log(answer.managerselect)
         let roleId = answer.roleselect.split(" ")
         return connection.promise().query(
             "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)", [answer.firstname, answer.lastname, roleId[0], answer.managerselect]
