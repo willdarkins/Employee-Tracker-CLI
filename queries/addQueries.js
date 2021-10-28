@@ -4,7 +4,31 @@ const inquirer = require('inquirer');
 const { introPrompt } = require('../app');
 
 const addDepartment = () => {
-    console.log('This works!')
+    console.log(`
+    ====================
+       Add Department
+    ====================
+    `);
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Please enter a department name:',
+            validate: deptanswer => {
+                if (deptanswer) {
+                    return true;
+                } else {
+                    console.log('\nA department name is required:')
+                    return false;
+                }
+            }
+        }
+    ]).then((answer) => {
+        return connection.promise().query(
+            "INSERT INTO department (name) VALUES (?)", [answer.name]
+            ).then( (res) => {
+                console.log(`${answer.name} department successfully added!`)})
+    })
 }
 
 const addRole = () => {
@@ -51,7 +75,7 @@ const addRole = () => {
         return connection.promise().query(
             "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)", [answer.title, answer.salary, deptId[0]]
             ).then( (res) => {
-                console.log(`${answer.title} department successfully added!`)})
+                console.log(`${answer.title} role successfully added!`)})
     })
 }
 
@@ -116,8 +140,6 @@ const addEmployee = () => {
                 console.log(`${answer.firstname} ${answer.lastname} successfully added!`)})
     })
 }
-
-
 
 module.exports = {
     addDepartment,
