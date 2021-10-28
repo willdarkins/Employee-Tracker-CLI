@@ -65,6 +65,10 @@ const addEmployee = () => {
             }
         }
     ]).then((answer) => {
+        console.log(answer.firstname)
+        console.log(answer.lastname)
+        console.log(answer.roleselect)
+        console.log(answer.managerselect)
         let roleId = answer.roleselect.split(" ")
         return connection.promise().query(
             "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)", [answer.firstname, answer.lastname, roleId, answer.managerselect],
