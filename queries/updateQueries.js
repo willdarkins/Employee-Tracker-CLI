@@ -1,6 +1,7 @@
 const mysql = require('mysql2');
 const connection = require('../db/connection');
 const inquirer = require('inquirer');
+const { introPrompt } = require('../app');
 
 const updateRole = () => {
     connection.query("SELECT * FROM role", (err, res) => {
@@ -49,8 +50,8 @@ const updateRole = () => {
             return connection.promise().query(
                 "UPDATE employee SET role_ID=? WHERE id=?",
                 [answer.rolepick, answer.employeepick]
-            ).then((res) => {
-                console.log(employees)
+            ).then(() => {
+                introPrompt();
             })
         })
 
@@ -68,7 +69,7 @@ const updatedEmployManager = () => {
                 value: manager.id
             }
         })
-        connection.query("SELECT * FROM employee", (err, res) => {
+        connection.query("SELECT * FROM employee WHERE id > 4", (err, res) => {
             if (err) {
                 throw (error);
             }
@@ -104,8 +105,8 @@ const updatedEmployManager = () => {
             return connection.promise().query(
                 "UPDATE employee SET employee.manager_id = ? WHERE employee.id = ?",
                 [answer.managerpick, answer.employeepick]
-            ).then((res) => {
-                console.log(employees)
+            ).then(() => {
+                introPrompt();
             })
         })
 

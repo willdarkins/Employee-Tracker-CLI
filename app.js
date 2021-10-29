@@ -19,9 +19,9 @@ const introPrompt = () => {
             name: 'mainselect',
             message: 'Please choose from one of the following options:',
             choices: ['View All Departments', 'View All Roles', 'View All Employees',
-                'View employees by manager', 'View employees by department', 'Add a Department',
-                'Add a Role', 'Add an Employee', 'Update an Employee Role', 'Update employee manager',
-                'Delete departments', 'Delete roles', 'Delete Employees', 'Exit']
+                'View Employees by Manager', 'View Employees by Department', 'Add a Department',
+                'Add a Role', 'Add an Employee', 'Update an Employee Role', 'Update Employee Manager',
+                'Delete Departments', 'Delete roles', 'Delete Employees', 'Exit']
         }
     ])
         .then(({ mainselect }) => {
@@ -47,13 +47,13 @@ const introPrompt = () => {
                 case 'Update an Employee Role':
                     updateRole()
                     break;
-                case 'Update employee manager':
+                case 'Update Employee Manager':
                     updatedEmployManager()
                     break;
-                case 'View employees by manager':
+                case 'View Employees by Manager':
                     viewEmployeesByManager()
                     break;
-                case 'View employees by department':
+                case 'View Employees by Department':
                     viewEmployeesByDepartment()
                     break;
                 case 'Delete departments':
@@ -77,3 +77,6 @@ const introPrompt = () => {
 
 introPrompt();
 
+module.exports = {
+    introPrompt
+}

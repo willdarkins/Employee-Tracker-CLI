@@ -26,8 +26,12 @@ const addDepartment = () => {
     ]).then((answer) => {
         return connection.promise().query(
             "INSERT INTO department (name) VALUES (?)", [answer.name]
-            ).then( (res) => {
-                console.log(`${answer.name} department successfully added!`)})
+        ).then((res) => {
+            console.log(`${answer.name} department successfully added!`)
+        })
+            .then(() => {
+                introPrompt();
+            })
     })
 }
 
@@ -74,8 +78,11 @@ const addRole = () => {
         let deptId = answer.department.split(" ");
         return connection.promise().query(
             "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)", [answer.title, answer.salary, deptId[0]]
-            ).then( (res) => {
-                console.log(`${answer.title} role successfully added!`)})
+        ).then((res) => {
+            console.log(`${answer.title} role successfully added!`)
+        }).then(() => {
+            introPrompt();
+        })
     })
 }
 
@@ -136,8 +143,11 @@ const addEmployee = () => {
         let roleId = answer.roleselect.split(" ")
         return connection.promise().query(
             "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)", [answer.firstname, answer.lastname, roleId[0], answer.managerselect]
-            ).then( (res) => {
-                console.log(`${answer.firstname} ${answer.lastname} successfully added!`)})
+        ).then((res) => {
+            console.log(`${answer.firstname} ${answer.lastname} successfully added!`)
+        }).then(() => {
+            introPrompt();
+        })
     })
 }
 

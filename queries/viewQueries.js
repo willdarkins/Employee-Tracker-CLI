@@ -9,7 +9,7 @@ const viewAllDepartments = () => {
       console.log('\n')
       console.table(depts);
     }).then(() => {
-      introPrompt;
+      introPrompt();
     })
 }
 
@@ -19,7 +19,7 @@ const viewAllRoles = () => {
       console.log('\n')
       console.table(roles)
     }).then(() => {
-      introPrompt;
+      introPrompt();
     })
 }
 
@@ -34,40 +34,39 @@ const viewAllEmployees = () => {
     console.log('\n')
     console.table(employees)
   }).then(() => {
-    introPrompt;
+    introPrompt();
   })
 }
 
 const viewEmployeesByManager = () => {
-  return connection.promise().query(`SELECT CONCAT(mgr.first_name, ' ', mgr.last_name) AS manager,
+  return connection.promise().query(`SELECT CONCAT(manager.first_name, ' ', manager.last_name) AS manager,
   CONCAT(employee.first_name, ' ', employee.last_name) AS employee, role.title
 FROM employee
-LEFT JOIN employee mgr
-  ON employee.manager_id = mgr.id
+LEFT JOIN employee manager
+  ON employee.manager_id = manager.id
 LEFT JOIN role
   ON employee.role_id = role.id
-ORDER BY mgr.id`).then(([employees]) => {
-  console.log('\n')
-  console.table(employees)
-}).then(() => {
-  introPrompt;
-})
+ORDER BY manager.id`).then(([employees]) => {
+    console.log('\n')
+    console.table(employees)
+  }).then(() => {
+    introPrompt();
+  })
 }
 
 const viewEmployeesByDepartment = () => {
-  return connection.promise().query(`SELECT department.name AS department,
-  CONCAT(employee.first_name, ' ', employee.last_name) AS employee,
+  return connection.promise().query(`SELECT employee.id AS 'ID', 
+  first_name AS 'First Name', 
+  last_name AS 'Last Name'
 FROM employee
-LEFT JOIN employee department
-  ON employee.manager_id = mgr.id
-LEFT JOIN role
-  ON employee.role_id = role.id
-ORDER BY mgr.id`).then(([employees]) => {
-  console.log('\n')
-  console.table(employees)
-}).then(() => {
-  introPrompt;
-})
+WHERE employee.role_id = ANY (SELECT role.id FROM role WHERE role.department_id = ?)
+ORDER BY employee.id
+`).then(([employees]) => {
+    console.log('\n')
+    console.table(employees)
+  }).then(() => {
+    introPrompt();
+  })
 }
 
 module.exports = {
