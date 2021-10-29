@@ -1,10 +1,11 @@
-//List of Node.js modules needed to run application
+//Dependencies for Inquirer and console.table imported
 const inquirer = require('inquirer');
 require("console.table");
+//Destructured functions imported from corresponding query files located in the queries directory
 const { viewAllDepartments, viewAllRoles, viewAllEmployees, viewEmployeesByManager, viewEmployeesByDepartment } = require('./queries/viewQueries');
 const { addDepartment, addRole, addEmployee } = require('./queries/addQueries');
 const { updateRole, updatedEmployManager } = require('./queries/updateQueries');
-
+//Initiates application menu
 const introPrompt = () => {
     console.log(`
      ====================================
@@ -12,6 +13,7 @@ const introPrompt = () => {
      ====================================
      `
     );
+    //Inquirer prompt renders main menu with all selections listed in CMS
     inquirer.prompt([
         {
             type: 'list',
@@ -22,7 +24,7 @@ const introPrompt = () => {
                 'Add a Role', 'Add an Employee', 'Update an Employee Role', 'Update Employee Manager',
                 'Exit']
         }
-    ])
+    ])//Selection is filterd through switch statement which fulfills promoise from query files
         .then(({ mainselect }) => {
             switch (mainselect) {
                 case 'View All Departments':
@@ -86,5 +88,5 @@ const introPrompt = () => {
 }
 
 introPrompt();
-
+//Exported IntroPrompt
 module.exports = { introPrompt }

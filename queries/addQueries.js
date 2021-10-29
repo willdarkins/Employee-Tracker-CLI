@@ -26,13 +26,13 @@ const addDepartment = async() => {
         return connection.promise().query(
             "INSERT INTO department (name) VALUES (?)", [answer.name]
         ).then((res) => {
-            console.log(`${answer.name} department successfully added!`)
+            console.log(`\n ${answer.name} department successfully added!`)
         })
     })
 
 }
 
-const addRole = () => {
+const addRole = async() => {
     console.log(`
     ==============
        Add Role
@@ -76,7 +76,7 @@ const addRole = () => {
         return connection.promise().query(
             "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)", [answer.title, answer.salary, deptId[0]]
         ).then((res) => {
-            console.log(`${answer.title} role successfully added!`)
+            console.log(`\n${answer.title} role successfully added!`)
         })
     })
 }
@@ -139,7 +139,7 @@ const addEmployee = async() => {
         return connection.promise().query(
             "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)", [answer.firstname, answer.lastname, roleId[0], answer.managerselect]
         ).then((res) => {
-            console.log(`${answer.firstname} ${answer.lastname} successfully added!`)
+            console.log(`\n${answer.firstname} ${answer.lastname} successfully added!`)
         })
     })
 }
