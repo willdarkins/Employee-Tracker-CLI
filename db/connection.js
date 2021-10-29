@@ -1,6 +1,7 @@
+//Dependencies fro mysql2 and dotenv
 const mysql = require('mysql2');
 require('dotenv').config()
-// Connect to database
+//Established database connection using dotenv, storing configuration data in the environment separate from code
 const db = mysql.createConnection(
     {
         host: process.env.DB_HOST,
@@ -10,5 +11,5 @@ const db = mysql.createConnection(
     },
     console.log('Connected to the staff_db database.')
 );
-
+//staff_db export statement
 module.exports = db;
