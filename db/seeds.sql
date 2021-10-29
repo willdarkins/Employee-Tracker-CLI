@@ -1,10 +1,11 @@
+/*Hardcoded department data*/
 INSERT INTO department (id, name)
 VALUES
 (1, 'Sales'),
 (2, 'Engineering'),
 (3, 'Finance'),
 (4, 'Legal');
-
+/*Hardcoded role data*/
 INSERT INTO role (id, title, salary, department_id)
 VALUES
 (1, 'Saleslead', 75000, 1),
@@ -15,7 +16,7 @@ VALUES
 (6, 'Accountant', 60000, 3),
 (7, 'Legal Team Lead', 110000, 4),
 (8, 'Lawyer', 100000, 4);
-
+/*Preliminary employee information for demonstrative purposes*/
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
 VALUES
 (1, 'Roger', 'Federer', 1, NULL),
