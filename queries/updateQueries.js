@@ -1,7 +1,6 @@
 const mysql = require('mysql2');
 const connection = require('../db/connection');
 const inquirer = require('inquirer');
-const introPrompt = require('../app');
 
 const updateRole = async() => {
     connection.query("SELECT * FROM role", (err, res) => {
@@ -27,13 +26,13 @@ const updateRole = async() => {
             updatePrompt(employees, roles)
         })
     })
-    const updatePrompt = (employees, roles) => {
+    const updatePrompt = async(employees, roles) => {
         console.log(`
     ==========================
        Update Employee Role
     ==========================
     `);
-        inquirer.prompt([
+        return inquirer.prompt([
             {
                 type: 'list',
                 name: 'employeepick',
@@ -77,10 +76,10 @@ const updatedEmployManager = async() => {
                     value: employee.id
                 }
             })
-            updatePrompt(employees, managers)
+        return updatePrompt(employees, managers)
         })
     })
-    const updatePrompt = (employees, managers) => {
+    const updatePrompt = async(employees, managers) => {
         console.log(`
     =============================
        Update Employee Manager
@@ -103,9 +102,7 @@ const updatedEmployManager = async() => {
             return connection.promise().query(
                 "UPDATE employee SET employee.manager_id = ? WHERE employee.id = ?",
                 [answer.managerpick, answer.employeepick]
-            ).then(() => {
-                introPrompt();
-            })
+            )
         })
 
     }

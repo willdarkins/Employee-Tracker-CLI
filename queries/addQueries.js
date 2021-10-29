@@ -8,7 +8,7 @@ const addDepartment = async() => {
        Add Department
     ====================
     `);
-    inquirer.prompt([
+    return inquirer.prompt([
         {
             type: 'input',
             name: 'name',
@@ -29,6 +29,7 @@ const addDepartment = async() => {
             console.log(`${answer.name} department successfully added!`)
         })
     })
+
 }
 
 const addRole = () => {
@@ -37,7 +38,7 @@ const addRole = () => {
        Add Role
     ==============
     `);
-    inquirer.prompt([
+    return inquirer.prompt([
         {
             type: 'input',
             name: 'title',
@@ -86,7 +87,7 @@ const addEmployee = async() => {
            Add Employee
         ==================
         `);
-    inquirer.prompt([
+    return inquirer.prompt([
         {
             type: 'input',
             name: 'firstname',
