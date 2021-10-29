@@ -1,9 +1,8 @@
 const mysql = require('mysql2');
 const connection = require('../db/connection');
 const inquirer = require('inquirer');
-const { introPrompt } = require('../app');
 
-const addDepartment = () => {
+const addDepartment = async() => {
     console.log(`
     ====================
        Add Department
@@ -29,9 +28,6 @@ const addDepartment = () => {
         ).then((res) => {
             console.log(`${answer.name} department successfully added!`)
         })
-            .then(() => {
-                introPrompt();
-            })
     })
 }
 
@@ -80,13 +76,11 @@ const addRole = () => {
             "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)", [answer.title, answer.salary, deptId[0]]
         ).then((res) => {
             console.log(`${answer.title} role successfully added!`)
-        }).then(() => {
-            introPrompt();
         })
     })
 }
 
-const addEmployee = () => {
+const addEmployee = async() => {
     console.log(`
         ==================
            Add Employee
@@ -145,8 +139,6 @@ const addEmployee = () => {
             "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)", [answer.firstname, answer.lastname, roleId[0], answer.managerselect]
         ).then((res) => {
             console.log(`${answer.firstname} ${answer.lastname} successfully added!`)
-        }).then(() => {
-            introPrompt();
         })
     })
 }

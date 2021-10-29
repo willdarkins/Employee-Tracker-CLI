@@ -1,29 +1,24 @@
 const mysql = require('mysql2');
 const connection = require('../db/connection');
-const { introPrompt } = require('../app');
 
 //View all departments
-const viewAllDepartments = () => {
+const viewAllDepartments = async() => {
   return connection.promise().query("SELECT * FROM department")
     .then(([depts]) => {
       console.log('\n')
       console.table(depts);
-    }).then(() => {
-      introPrompt();
     })
 }
 
-const viewAllRoles = () => {
+const viewAllRoles = async() => {
   return connection.promise().query("SELECT * FROM role")
     .then(([roles]) => {
       console.log('\n')
       console.table(roles)
-    }).then(() => {
-      introPrompt();
     })
 }
 
-const viewAllEmployees = () => {
+const viewAllEmployees = async() => {
   return connection.promise().query(`
   SELECT employee.id, employee.first_name, employee.last_name, role.title AS role, role.salary, department.name AS department, CONCAT(manager.first_name, " ", manager.last_name) AS manager
   FROM employee
@@ -33,28 +28,22 @@ const viewAllEmployees = () => {
 `).then(([employees]) => {
     console.log('\n')
     console.table(employees)
-  }).then(() => {
-    introPrompt();
   })
 }
 
-const viewEmployeesByManager = () => {
+const viewEmployeesByManager = async() => {
   return connection.promise().query(`SELECT CONCAT(manager.first_name, ' ', manager.last_name) AS manager,
-  CONCAT(employee.first_name, ' ', employee.last_name) AS employee, role.title
+CONCAT(employee.first_name, ' ', employee.last_name) AS employee, role.title
 FROM employee
-LEFT JOIN employee manager
-  ON employee.manager_id = manager.id
-LEFT JOIN role
-  ON employee.role_id = role.id
+LEFT JOIN employee manager ON employee.manager_id = manager.id
+LEFT JOIN role ON employee.role_id = role.id
 ORDER BY manager.id`).then(([employees]) => {
     console.log('\n')
     console.table(employees)
-  }).then(() => {
-    introPrompt();
   })
 }
 
-const viewEmployeesByDepartment = () => {
+const viewEmployeesByDepartment = async() => {
   return connection.promise().query(`SELECT employee.id AS 'ID', 
   first_name AS 'First Name', 
   last_name AS 'Last Name'
@@ -64,8 +53,6 @@ ORDER BY employee.id
 `).then(([employees]) => {
     console.log('\n')
     console.table(employees)
-  }).then(() => {
-    introPrompt();
   })
 }
 

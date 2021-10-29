@@ -1,9 +1,9 @@
 const mysql = require('mysql2');
 const connection = require('../db/connection');
 const inquirer = require('inquirer');
-const { introPrompt } = require('../app');
+const introPrompt = require('../app');
 
-const updateRole = () => {
+const updateRole = async() => {
     connection.query("SELECT * FROM role", (err, res) => {
         if (err) {
             throw (error);
@@ -50,15 +50,13 @@ const updateRole = () => {
             return connection.promise().query(
                 "UPDATE employee SET role_ID=? WHERE id=?",
                 [answer.rolepick, answer.employeepick]
-            ).then(() => {
-                introPrompt();
-            })
+            )
         })
 
     }
 }
 
-const updatedEmployManager = () => {
+const updatedEmployManager = async() => {
     connection.query("SELECT * FROM employee WHERE manager_id is NULL", (err, res) => {
         if (err) {
             throw (error);

@@ -4,7 +4,6 @@ require("console.table");
 const { viewAllDepartments, viewAllRoles, viewAllEmployees, viewEmployeesByManager, viewEmployeesByDepartment } = require('./queries/viewQueries');
 const { addDepartment, addRole, addEmployee } = require('./queries/addQueries');
 const { updateRole, updatedEmployManager } = require('./queries/updateQueries');
-const { deleteDepartments, deleteRoles, deleteEmployees } = require('./queries/deleteQueries');
 
 const introPrompt = () => {
     console.log(`
@@ -21,49 +20,60 @@ const introPrompt = () => {
             choices: ['View All Departments', 'View All Roles', 'View All Employees',
                 'View Employees by Manager', 'View Employees by Department', 'Add a Department',
                 'Add a Role', 'Add an Employee', 'Update an Employee Role', 'Update Employee Manager',
-                'Delete Departments', 'Delete roles', 'Delete Employees', 'Exit']
+                'Exit']
         }
     ])
         .then(({ mainselect }) => {
             switch (mainselect) {
                 case 'View All Departments':
-                    viewAllDepartments()
+                    viewAllDepartments().then(() => {
+                        introPrompt();
+                    })
                     break;
                 case 'View All Roles':
-                    viewAllRoles()
+                    viewAllRoles().then(() => {
+                        introPrompt();
+                    })
                     break;
                 case 'View All Employees':
-                    viewAllEmployees()
+                    viewAllEmployees().then(() => {
+                        introPrompt();
+                    })
                     break;
                 case 'Add a Department':
-                    addDepartment()
+                    addDepartment().then(() => {
+                        introPrompt();
+                    })
                     break;
                 case 'Add a Role':
-                    addRole()
+                    addRole().then(() => {
+                        introPrompt();
+                    })
                     break;
                 case 'Add an Employee':
-                    addEmployee()
+                    addEmployee().then(() => {
+                        introPrompt();
+                    })
                     break;
                 case 'Update an Employee Role':
-                    updateRole()
+                    updateRole().then(() => {
+                        introPrompt();
+                    })
                     break;
                 case 'Update Employee Manager':
-                    updatedEmployManager()
+                    updatedEmployManager().then(() => {
+                        introPrompt();
+                    })
                     break;
                 case 'View Employees by Manager':
-                    viewEmployeesByManager()
+                    viewEmployeesByManager().then(() => {
+                        introPrompt();
+                    })
                     break;
                 case 'View Employees by Department':
-                    viewEmployeesByDepartment()
-                    break;
-                case 'Delete departments':
-                    deleteDepartments()
-                    break;
-                case 'Delete roles':
-                    deleteRoles()
-                    break;
-                case 'Delete Employees':
-                    deleteEmployees()
+                    viewEmployeesByDepartment().then(() => {
+                        introPrompt();
+                    })
                     break;
                 case 'Exit':
                     console.log('Bye');
@@ -77,6 +87,4 @@ const introPrompt = () => {
 
 introPrompt();
 
-module.exports = {
-    introPrompt
-}
+module.exports = { introPrompt }
