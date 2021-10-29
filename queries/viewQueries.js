@@ -1,3 +1,4 @@
+//Dependencies imported for mysql2 amd database
 const mysql = require('mysql2');
 const connection = require('../db/connection');
 
@@ -9,7 +10,7 @@ const viewAllDepartments = async() => {
       console.table(depts);
     })
 }
-
+//View all roles
 const viewAllRoles = async() => {
   return connection.promise().query("SELECT * FROM role")
     .then(([roles]) => {
@@ -17,7 +18,7 @@ const viewAllRoles = async() => {
       console.table(roles)
     })
 }
-
+//View all employees
 const viewAllEmployees = async() => {
   return connection.promise().query(`
   SELECT employee.id, employee.first_name, employee.last_name, role.title AS role, role.salary, department.name AS department, CONCAT(manager.first_name, " ", manager.last_name) AS manager
@@ -30,7 +31,7 @@ const viewAllEmployees = async() => {
     console.table(employees)
   })
 }
-
+//View all employees by their manager
 const viewEmployeesByManager = async() => {
   return connection.promise().query(`SELECT CONCAT(manager.first_name, ' ', manager.last_name) AS manager,
 CONCAT(employee.first_name, ' ', employee.last_name) AS employee, role.title
@@ -42,7 +43,7 @@ ORDER BY manager.id`).then(([employees]) => {
     console.table(employees)
   })
 }
-
+//View all employees by their department
 const viewEmployeesByDepartment = async() => {
   return connection.promise().query(`SELECT department.name AS department, role.title, employee.id, employee.first_name, employee.last_name
   FROM employee
@@ -53,7 +54,7 @@ const viewEmployeesByDepartment = async() => {
     console.table(employees)
   })
 }
-
+//Expots all view queries
 module.exports = {
   viewAllDepartments,
   viewAllRoles,

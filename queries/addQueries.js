@@ -1,7 +1,8 @@
+//Dependencies imported for mysql2, database connection and Inquirer
 const mysql = require('mysql2');
 const connection = require('../db/connection');
 const inquirer = require('inquirer');
-
+//Async function initiates inquirer to gather infomration and create new department
 const addDepartment = async() => {
     console.log(`
     ====================
@@ -31,7 +32,7 @@ const addDepartment = async() => {
     })
 
 }
-
+//Async function initiates inquirer to gather infomration and create new role
 const addRole = async() => {
     console.log(`
     ==============
@@ -80,7 +81,7 @@ const addRole = async() => {
         })
     })
 }
-
+//Async function initiates inquirer to gather infomration and create new employee
 const addEmployee = async() => {
     console.log(`
         ==================
@@ -143,7 +144,7 @@ const addEmployee = async() => {
         })
     })
 }
-
+//Expots all add queries
 module.exports = {
     addDepartment,
     addRole,

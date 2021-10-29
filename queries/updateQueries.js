@@ -1,7 +1,8 @@
+//Dependencies imported for mysql2, database connection and Inquirer
 const mysql = require('mysql2');
 const connection = require('../db/connection');
 const inquirer = require('inquirer');
-
+//Async function initiates inquirer to gather infomration and update an employee role
 const updateRole = async () => {
     const updatePrompt = async (employees, roles) => {
         console.log(`
@@ -47,7 +48,7 @@ const updateRole = async () => {
         })
     })
 }
-
+//Async function initiates inquirer to gather infomration and update an employee's manager
 const updatedEmployManager = async () => {
     const updatePrompt = async (employees, managers) => {
         console.log(`
@@ -93,7 +94,7 @@ const updatedEmployManager = async () => {
         })
     })
 }
-
+//Expots all update queries
 module.exports = {
     updateRole,
     updatedEmployManager
