@@ -5,6 +5,14 @@
 *The what, why, and how:*<br>
 ❓ A content managment system  geared towards helping small business owners view and manage employee data counter to departments, roles, id's and salaries. When used properly, the application should be a tool to help the user better organize and plan their bussiness.
 
+Please follow THIS LINK to view a working video tutorial of the application.
+
+Below are screenshots that provide further reference:
+
+![SCREENSHOT_1](https://user-images.githubusercontent.com/84754257/139514956-93b50ece-d1b9-4cd9-8d24-31c27dc2cded.png)
+![SCREENSHOT_2](https://user-images.githubusercontent.com/84754257/139514957-1ba82c70-8730-4695-a7cc-2c0cca261766.png)
+![SCREENSHOT_3](https://user-images.githubusercontent.com/84754257/139514961-9fc6699d-c8e9-4a88-897e-2454b9ec85bf.png)
+
 ## Table of Contents
 
 * [Installation](#installation)
