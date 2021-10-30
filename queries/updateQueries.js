@@ -5,7 +5,6 @@ const inquirer = require('inquirer');
 //Async function initiates inquirer to gather infomration and update an employee role
 const updateRole = async () => {
     const updatePrompt = async (employees, roles) => {
-        console.log(employees)
         console.log(`
     ==========================
        Update Employee Role
@@ -28,7 +27,7 @@ const updateRole = async () => {
             return connection.promise().query(
                 "UPDATE employee SET role_ID=? WHERE id=?",
                 [answer.rolepick, answer.employeepick],
-                console.log(`The Employee's role has been changed!`)
+                console.log('\nEmployee\'s role has been updated!')
             )
         })
     }
@@ -75,7 +74,8 @@ const updatedEmployManager = async () => {
         ]).then((answer) => {
             return connection.promise().query(
                 "UPDATE employee SET employee.manager_id = ? WHERE employee.id = ?",
-                [answer.managerpick, answer.employeepick]
+                [answer.managerpick, answer.employeepick],
+                console.log('\nEmployee\'s manager has been updated!')
             )
         })
     }

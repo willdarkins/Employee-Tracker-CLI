@@ -78,7 +78,7 @@ const introPrompt = () => {
                     })
                     break;
                 case 'Exit':
-                    console.log('Bye');
+                    console.log('\nBye');
                     process.exit();
                 default:
                     ''
