@@ -73,6 +73,8 @@ Below are screenshots that provide further reference:
 Please consult this documentation before contributing to this project.
 
 ## Questions
+![Profile Pic](https://user-images.githubusercontent.com/84754257/139515062-f9176e2b-f53c-4df1-a259-586cf72fedc5.jpg)
+
 If you have any questions regarding the development process of this application, or specific questions about contributing, feel free to reach me by email or on Github.
 * Email 📪 willdarkins@gmail.com
 * Github 🗿 [willdarkins](https://github.com/willdarkins) 
