@@ -5,7 +5,7 @@
 *The what, why, and how:*<br>
 ❓ A content managment system  geared towards helping small business owners view and manage employee data counter to departments, roles, id's and salaries. When used properly, the application should be a tool to help the user better organize and plan their bussiness.
 
-Please follow THIS LINK to view a working video tutorial of the application.
+Please follow <a href= https://vimeo.com/640578208 target="__blank">THIS LINK</a> to view a working video tutorial of the application.
 
 Below are screenshots that provide further reference:
 
